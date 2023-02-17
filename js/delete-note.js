@@ -4,9 +4,16 @@ function deleteNote(event) {
   if (event.currentTarget.previousElementSibling.value == "notes") {
     obj = removeObjFromGivenArrayAndId(archive, id);
     removeObjFromDivDom("archive", obj[0].id);
-  } else {
+  } else if (event.currentTarget.previousElementSibling.value == "archive") {
     obj = removeObjFromGivenArrayAndId(notes, id);
     removeObjFromDivDom("notes", obj[0].id);
+  } else {
+    obj = removeObjFromGivenArrayAndId(trash, id);
+    removeObjFromDivDom("trash", obj[0].id);
+  }
+  if (obj[0].category != "trash") {
+    changeObjCategory(obj[0], "trash");
+    storeObjectInArray(trash, obj[0]);
   }
   updateLocalStorageData();
 
@@ -14,6 +21,8 @@ function deleteNote(event) {
     checkIfEmpty(notes);
   } else if (obj[0].category == "archive") {
     checkIfEmpty(archive);
+  } else if (obj[0].category == "trash") {
+    checkIfEmpty(trash);
   } else {
     if (!checkIfEmpty(notes) || !checkIfEmpty(archive)) {
       checkIfEmpty([1, 2]); //just random array

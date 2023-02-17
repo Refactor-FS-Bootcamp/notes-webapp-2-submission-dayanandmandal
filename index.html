@@ -16,9 +16,18 @@
     <div class="multiple-archive-delete">
       <button
         type="button"
+        id="multiple-notes-button"
+        name="notes"
+        value="notes"
+        onclick="notesAllCard(event)"
+      >
+        Notes
+      </button>
+      <button
+        type="button"
         id="multiple-archive-button"
-        name="Archive"
-        value="Archive"
+        name="archive"
+        value="archive"
         onclick="archiveAllCard(event)"
       >
         Archive
@@ -26,8 +35,8 @@
       <button
         type="button"
         id="multiple-delete-button"
-        name="Delete"
-        value="Delete"
+        name="delete"
+        value="delete"
         onclick="deleteAllCard(event)"
       >
         Delete
@@ -50,7 +59,9 @@
           id="main-menu-img"
           onclick="toggleSideMenu()"
         />
-        <span id="show-current-section"> Section </span>
+        <span id="show-current-section" style="padding-right: 10px">
+          Section
+        </span>
       </div>
       <div class="header-form-search">
         <form action="#" id="form-search">
@@ -145,13 +156,7 @@
         <a href="#" id="side-menu-archive-a" onclick="showArchiveNotes()"
           >Archives</a
         >
-        <a
-          href="#"
-          id="side-menu-trash-a"
-          onclick="showTrashNotes()"
-          style="display: none"
-          >Trash</a
-        >
+        <a href="#" id="side-menu-trash-a" onclick="showTrashNotes()">Trash</a>
         <a href="#" id="side-menu-all-notes-a" onclick="showAllNotes()"
           >All Notes</a
         >
@@ -162,9 +167,10 @@
 
       <div class="notes-show"></div>
       <div class="archive-show"></div>
-      <!-- <div class="trash-show"></div> -->
+      <div class="trash-show"></div>
       <div class="all-notes-show"></div>
     </main>
+    <script src="./js/mutiple-delete-archive.js"></script>
     <script src="./js/change-note-bg-color.js"></script>
     <script src="./js/form-add-notes.js"></script>
     <script src="./js/toggle-side-bar.js"></script>
@@ -173,6 +179,6 @@
     <script src="./js/delete-note.js"></script>
     <script src="./js/edit-note.js"></script>
     <script src="./js/global-onclick-event.js"></script>
-    <script src="./js/mutiple-delete-archive.js"></script>
+    <script src="./js/trash-note.js"></script>
   </body>
 </html>

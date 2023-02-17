@@ -1,9 +1,7 @@
 let notes = [];
 let archive = [];
-// let trash = [];
+let trash = [];
 let idCount = 1;
-
-// let isEditing = false;
 
 if (localStorage.getItem("count") == null) {
   localStorage.setItem("count", 1);
@@ -20,6 +18,7 @@ function copyDataFromLocalStorage() {
 showNotes();
 
 function showNotes() {
+  hideMultipleMenu();
   removeCategoryDiv();
   hideAllNotesCard();
   clearHighlightOfSideMenuAll();
@@ -31,6 +30,7 @@ function showNotes() {
 }
 
 function showArchiveNotes() {
+  hideMultipleMenu();
   removeCategoryDiv();
   hideAllNotesCard();
   clearHighlightOfSideMenuAll();
@@ -51,28 +51,30 @@ function checkIfEmpty(arr) {
   }
 }
 
-// function showTrashNotes() {
+function showTrashNotes() {
+  hideAllNotesCard();
+  hideMultipleMenu();
+  clearHighlightOfSideMenuAll();
+  hightLightGivenSideMenu("trash");
+  displayBlockGivenArray("trash");
+  clearNotesFromGivenDiv("trash");
+  displayAllNotesFromGivenArray(trash);
+  checkIfEmpty(trash);
+}
+
+// function showAllNotes() {
 //   hideAllNotesCard();
 //   clearHighlightOfSideMenuAll();
-//   hightLightGivenSideMenu("trash");
-//   displayBlockGivenArray("trash");
-//   clearNotesFromGivenDiv("trash");
-//   displayAllNotesFromGivenArray(trash);
+//   hightLightGivenSideMenu("all-notes");
+//   displayBlockGivenArray("archive");
+//   displayBlockGivenArray("notes");
+//   clearNotesFromGivenDiv("archive");
+//   clearNotesFromGivenDiv("notes");
+//   addCategoryDiv();
+//   if (!checkIfEmpty(notes) || !checkIfEmpty(archive)) {
+//     checkIfEmpty([1, 2]); //just random array
+//   }
 // }
-
-function showAllNotes() {
-  hideAllNotesCard();
-  clearHighlightOfSideMenuAll();
-  hightLightGivenSideMenu("all-notes");
-  displayBlockGivenArray("archive");
-  displayBlockGivenArray("notes");
-  // clearNotesFromGivenDiv("archive");
-  // clearNotesFromGivenDiv("notes");
-  addCategoryDiv();
-  if (!checkIfEmpty(notes) || !checkIfEmpty(archive)) {
-    checkIfEmpty([1, 2]); //just random array
-  }
-}
 
 // function getHighLightedSideMenu() {
 //   let sideMenuNotes = document.querySelector(`#side-menu-all-notes-a`);
@@ -131,7 +133,7 @@ function displayBlockGivenArray(category) {
 function clearHighlightOfSideMenuAll() {
   document.querySelector(`#side-menu-notes-a`).style.backgroundColor = "";
   document.querySelector(`#side-menu-archive-a`).style.backgroundColor = "";
-  // document.querySelector(`#side-menu-trash-a`).style.backgroundColor = "";
+  document.querySelector(`#side-menu-trash-a`).style.backgroundColor = "";
   document.querySelector(`#side-menu-all-notes-a`).style.backgroundColor = "";
 }
 
@@ -151,6 +153,10 @@ function hideAllNotesCard() {
     div.style.display = "none";
   }
   div = document.querySelector(".archive-show");
+  if (div != null) {
+    div.style.display = "none";
+  }
+  div = document.querySelector(".trash-show");
   if (div != null) {
     div.style.display = "none";
   }
@@ -321,12 +327,17 @@ function getCardDivObject(cardDivHtml) {
 
 function getCardDiv(obj) {
   let span = "";
+  let displays = "";
+  // console.log(obj);
   if (obj.category == "notes") {
     span = "archive";
-  } else {
+  } else if (obj.category == "archive") {
     span = "notes";
+  } else {
+    span = "trash";
+    displays = "none";
   }
-  const htmlDiv = `<div class="note-card" id="note-card-${obj.id}" style="background:${obj.color}; overflow:hidden">
+  const htmlDiv = `<div class="note-card" id="note-card-${obj.id}" style="background:${obj.color}; overflow:hidden; data-category:${obj.category}">
   <div class="note-card-row-1">
     <span class="note-card-title">${obj.title}</span>
   </div>
@@ -337,16 +348,16 @@ function getCardDiv(obj) {
     <span class="note-card-edit-time">${obj.date}</span>
   </div>
   <div class="note-card-row-4" id="note-card-features">
-    <button type="button" value="edit" title="Edit" onclick="editNote(event)" style="background:${obj.color}">
-      <img src="./images/edit-icon.png" alt="" />
+    <button type="button" value="edit" title="Edit" onclick="editNote(event)" style="background:${obj.color}; display:${displays}">
+      <img src="./images/edit-icon.png" name="edit-img-logo" alt="" />
     </button>
     <button type="button" value="${span}" title="${span}" onclick="${span}Note(event)" style="background:${obj.color}">
       <img src="./images/${span}-icon.png" alt="" srcset="" />
     </button>
-    <button type="button" value="delete" title="Delete" onclick="deleteNote(event)" style="background:${obj.color}">
-      <img src="./images/delete-icon.png" alt="" />
+    <button type="button" value="delete" title="Delete" onclick="deleteNote(event)" style="background:${obj.color};">
+      <img src="./images/delete-icon.png" alt="edit" />
     </button>
-    <button type="button" value="select" title="Select" id="${obj.id}" style="background:${obj.color}">
+    <button type="button" value="select" title="Select" id="${obj.id}" style="background:${obj.color};">
       <input
         type="checkbox"
         name="selectedOrNot"

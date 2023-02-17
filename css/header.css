@@ -165,7 +165,6 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  /* z-index: 10; */
   width: 100%;
   background-color: white;
   height: 60px;
@@ -179,8 +178,9 @@ header {
 }
 
 #multiple-delete-button,
-#multiple-archive-button {
-  padding: 6px 15px;
+#multiple-archive-button,
+#multiple-notes-button {
+  padding: 6px 15px 4px;
 }
 
 #multiple-close-button {

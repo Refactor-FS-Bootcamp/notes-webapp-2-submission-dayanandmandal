@@ -3,6 +3,7 @@
 
 function editNote(event) {
   showHideForm();
+  hideMultipleMenu();
   const id = getIdEditFile(event.currentTarget);
   const cate = getCategoryEditFile(event.currentTarget);
   const obj = getObjFromGivenIdAndCategory(cate, id);
