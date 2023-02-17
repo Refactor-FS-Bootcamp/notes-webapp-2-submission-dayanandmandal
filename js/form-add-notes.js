@@ -53,7 +53,8 @@ function checkIfEmpty(arr) {
 
 function showTrashNotes() {
   hideAllNotesCard();
-  hideMultipleMenu();
+  removeCategoryDiv();
+  hideAllNotesCard();
   clearHighlightOfSideMenuAll();
   hightLightGivenSideMenu("trash");
   displayBlockGivenArray("trash");
@@ -62,19 +63,24 @@ function showTrashNotes() {
   checkIfEmpty(trash);
 }
 
-// function showAllNotes() {
-//   hideAllNotesCard();
-//   clearHighlightOfSideMenuAll();
-//   hightLightGivenSideMenu("all-notes");
-//   displayBlockGivenArray("archive");
-//   displayBlockGivenArray("notes");
-//   clearNotesFromGivenDiv("archive");
-//   clearNotesFromGivenDiv("notes");
-//   addCategoryDiv();
-//   if (!checkIfEmpty(notes) || !checkIfEmpty(archive)) {
-//     checkIfEmpty([1, 2]); //just random array
-//   }
-// }
+function showAllNotes() {
+  hideAllNotesCard();
+  clearHighlightOfSideMenuAll();
+  hightLightGivenSideMenu("all-notes");
+  clearNotesFromGivenDiv("archive");
+  clearNotesFromGivenDiv("notes");
+  clearNotesFromGivenDiv("trash");
+  displayBlockGivenArray("archive");
+  displayBlockGivenArray("notes");
+  displayBlockGivenArray("trash");
+  displayAllNotesFromGivenArray(notes);
+  displayAllNotesFromGivenArray(archive);
+  displayAllNotesFromGivenArray(trash);
+  addCategoryDiv();
+  if (!checkIfEmpty(notes) || !checkIfEmpty(archive) || !checkIfEmpty(trash)) {
+    checkIfEmpty([1, 2]); //just random array
+  }
+}
 
 // function getHighLightedSideMenu() {
 //   let sideMenuNotes = document.querySelector(`#side-menu-all-notes-a`);
@@ -96,6 +102,7 @@ function showTrashNotes() {
 function addCategoryDiv() {
   displayBeforeSection("notes");
   displayBeforeSection("archive");
+  displayBeforeSection("trash");
 }
 
 function removeCategoryDiv() {
@@ -108,10 +115,20 @@ function removeCategoryDiv() {
   if (div != null) {
     div.remove();
   }
+
+  div = document.querySelector(".before-trash-section-extra");
+  if (div != null) {
+    div.remove();
+  }
 }
 
 function displayBeforeSection(cate) {
-  const div = getCategoryDOMNode(`${cate}: `);
+  const name = cate[0].toLocaleUpperCase() + cate.slice(1);
+  const temp = document.querySelector(`.before-${cate}-section-extra`);
+  if (temp != undefined) {
+    return;
+  }
+  const div = getCategoryDOMNode(`${name}: `);
   const notesShowDiv = document.querySelector(`.${cate}-show`);
   div.style.marginBottom = "10px";
   div.style.fontSize = "20px";
