@@ -94,17 +94,17 @@ function getHighlightedSideMenu() {
   }
 
   div = document.querySelector("#side-menu-archive-a");
-  if (div.style.backgroundColor == "#feefc3") {
+  if (div.style.backgroundColor == "rgb(254, 239, 195)") {
     return "archive";
   }
 
   div = document.querySelector("#side-menu-trash-a");
-  if (div.style.backgroundColor == "#feefc3") {
+  if (div.style.backgroundColor == "rgb(254, 239, 195)") {
     return "trash";
   }
 
   div = document.querySelector("#side-menu-all-notes-a");
-  if (div.style.backgroundColor == "#feefc3") {
+  if (div.style.backgroundColor == "rgb(254, 239, 195)") {
     return "all-notes";
   }
 }

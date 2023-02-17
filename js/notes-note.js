@@ -6,6 +6,9 @@ function notesNote(event) {
   updateLocalStorageData();
   removeObjFromDivDom("archive", obj[0].id);
   checkIfEmpty(archive);
+  if (getHighlightedSideMenu() == "all-notes") {
+    showAllNotes();
+  }
 }
 
 function removeObjFromArchiveDom(id) {

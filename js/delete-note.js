@@ -28,4 +28,8 @@ function deleteNote(event) {
       checkIfEmpty([1, 2]); //just random array
     }
   }
+  // getHighlightedSideMenu()
+  if (getHighlightedSideMenu() == "all-notes") {
+    showAllNotes();
+  }
 }

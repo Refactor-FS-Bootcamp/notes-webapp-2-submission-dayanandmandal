@@ -27,6 +27,9 @@ function showNotes() {
   clearNotesFromGivenDiv("notes");
   displayAllNotesFromGivenArray(notes);
   checkIfEmpty(notes);
+  if (getHighlightedSideMenu() == "all-notes") {
+    showAllNotes();
+  }
 }
 
 function showArchiveNotes() {

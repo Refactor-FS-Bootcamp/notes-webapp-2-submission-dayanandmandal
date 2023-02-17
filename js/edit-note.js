@@ -79,4 +79,7 @@ function deleteNoteFromEditingFile(cate, id) {
     removeObjFromDivDom("archive", obj[0].id);
   }
   updateLocalStorageData();
+  if (getHighlightedSideMenu() == "all-notes") {
+    showAllNotes();
+  }
 }

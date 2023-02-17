@@ -6,6 +6,9 @@ function archiveNote(event) {
   updateLocalStorageData();
   removeObjFromDivDom("notes", obj[0].id);
   checkIfEmpty(notes);
+  if (getHighlightedSideMenu() == "all-notes") {
+    showAllNotes();
+  }
 
   // if (obj[0].category == "notes") {
   //   checkIfEmpty(notes);

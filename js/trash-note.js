@@ -6,4 +6,7 @@ function trashNote(event) {
   updateLocalStorageData();
   removeObjFromDivDom("trash", obj[0].id);
   checkIfEmpty(trash);
+  if (getHighlightedSideMenu() == "all-notes") {
+    showAllNotes();
+  }
 }
